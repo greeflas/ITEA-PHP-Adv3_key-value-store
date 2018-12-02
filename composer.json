@@ -1,0 +1,30 @@
+{
+    "name": "greeflas/php-key-value-store",
+    "description": "PHP implementations of key value store.",
+    "keywords": ["php", "key-value", "store"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladimir Kuprienko",
+            "email": "vldmr.kuprienko@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.1.0",
+        "ext-json": "*",
+        "symfony/yaml": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Greeflas\\Store\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Greeflas\\Store\\Tests\\": "tests/"
+        }
+    }
+}
