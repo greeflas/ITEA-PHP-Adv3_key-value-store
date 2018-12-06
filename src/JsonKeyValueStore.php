@@ -13,6 +13,9 @@ namespace Greeflas\Store;
 
 class JsonKeyValueStore extends AbstractFileKeyValueStore
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function load()
     {
         $storage = \file_get_contents($this->file);
@@ -21,6 +24,9 @@ class JsonKeyValueStore extends AbstractFileKeyValueStore
         return \is_array($data) ? $data : [];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function update(array $data)
     {
         $json = \json_encode($data, \JSON_PRETTY_PRINT);

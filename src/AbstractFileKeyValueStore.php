@@ -18,8 +18,18 @@ abstract class AbstractFileKeyValueStore implements KeyValueStoreInterface
 {
     use KeyValidatorTrait;
 
+    /**
+     * Full path to the file.
+     *
+     * @var string
+     */
     protected $file;
 
+    /**
+     * Loads file content and converts it to the array.
+     *
+     * @return array Converted file content.
+     */
     abstract protected function load();
 
     abstract protected function update(array $data);

@@ -15,6 +15,13 @@ use Greeflas\Store\Exception\KeyValidationException;
 
 trait KeyValidatorTrait
 {
+    /**
+     * Validates given key for supported format.
+     *
+     * @param mixed $key
+     *
+     * @throws KeyValidationException
+     */
     protected function validateKey($key)
     {
         if (!\is_string($key) && !\is_int($key)) {

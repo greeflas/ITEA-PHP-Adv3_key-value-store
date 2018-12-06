@@ -11,10 +11,18 @@
 
 namespace Greeflas\Store;
 
+/**
+ * Interface of key value store component.
+ *
+ * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
+ */
 interface KeyValueStoreInterface
 {
     /**
      * Stores value by key.
+     *
+     * Example of using:
+     * $store->set('defaultEmail', 'admin@example.com');
      *
      * @param string  $key   Name of the key.
      * @param mixed   $value Value to store.
