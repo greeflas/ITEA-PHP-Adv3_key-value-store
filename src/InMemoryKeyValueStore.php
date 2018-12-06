@@ -11,43 +11,27 @@
 
 namespace Greeflas\Store;
 
-use Greeflas\Store\Validation\KeyValidatorTrait;
-
-class InMemoryKeyValueStore implements KeyValueStoreInterface
+class InMemoryKeyValueStore implements KeyValueStoreInterface, \Countable
 {
-    use KeyValidatorTrait;
-
     private $storage = [];
 
-    public function set($key, $value)
+    public function set(string $key, $value): void
     {
-        $this->validateKey($key);
-
         $this->storage[$key] = $value;
     }
 
-    public function get($key, $default = null)
+    public function get(string $key, $default = null)
     {
-        $this->validateKey($key);
-
-        if ($this->has($key)) {
-            return $this->storage[$key];
-        }
-
-        return $default;
+        return $this->storage[$key] ?? $default;
     }
 
-    public function has($key)
+    public function has(string $key): bool
     {
-        $this->validateKey($key);
-
         return isset($this->storage[$key]);
     }
 
-    public function remove($key)
+    public function remove(string $key): void
     {
-        $this->validateKey($key);
-
         if ($this->has($key)) {
             unset($this->storage[$key]);
         }
@@ -56,5 +40,13 @@ class InMemoryKeyValueStore implements KeyValueStoreInterface
     public function clear(): void
     {
         $this->storage = [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count()
+    {
+        return \count($this->storage);
     }
 }

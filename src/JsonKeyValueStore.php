@@ -16,7 +16,7 @@ class JsonKeyValueStore extends AbstractFileKeyValueStore
     /**
      * {@inheritdoc}
      */
-    protected function load()
+    protected function load(): array
     {
         $storage = \file_get_contents($this->file);
         $data = \json_decode($storage, true);
@@ -27,7 +27,7 @@ class JsonKeyValueStore extends AbstractFileKeyValueStore
     /**
      * {@inheritdoc}
      */
-    protected function update(array $data)
+    protected function update(array $data): void
     {
         $json = \json_encode($data, \JSON_PRETTY_PRINT);
         \file_put_contents($this->file, $json, \LOCK_EX);

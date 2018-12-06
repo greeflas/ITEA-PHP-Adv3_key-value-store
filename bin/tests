@@ -3,9 +3,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Greeflas\Store\Tests\InMemoryKeyValueStorageTest;
-use Greeflas\Store\Tests\JsonKeyValueStorageTest;
-use Greeflas\Store\Tests\YamlKeyValueStorageTest;
+use Greeflas\Store\Tests\{InMemoryKeyValueStorageTest, JsonKeyValueStorageTest, YamlKeyValueStorageTest};
 
 $storageType = $argv[1] ?? null;
 

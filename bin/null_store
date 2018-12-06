@@ -1,0 +1,49 @@
+#!/usr/bin/env php
+<?php
+
+use Greeflas\Store\KeyValueStoreInterface;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$nullStore = new class implements KeyValueStoreInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function set(string $key, $value): void
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get(string $key, $default = null)
+    {
+        return $default;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function has(string $key): bool
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function remove(string $key): void
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clear(): void
+    {
+    }
+};
+
+$nullStore->set('defaultEmail', 'admin@example.com');
+\var_dump($nullStore->get('defaultEmail'));

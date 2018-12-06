@@ -11,13 +11,10 @@
 
 namespace Greeflas\Store;
 
-use Greeflas\Store\Validation\KeyValidatorTrait;
 use Greeflas\Store\Exception\InvalidConfigException;
 
 abstract class AbstractFileKeyValueStore implements KeyValueStoreInterface
 {
-    use KeyValidatorTrait;
-
     /**
      * Full path to the file.
      *
@@ -30,9 +27,9 @@ abstract class AbstractFileKeyValueStore implements KeyValueStoreInterface
      *
      * @return array Converted file content.
      */
-    abstract protected function load();
+    abstract protected function load(): array;
 
-    abstract protected function update(array $data);
+    abstract protected function update(array $data): void;
 
     public function __construct(string $pathToFile)
     {
@@ -51,19 +48,15 @@ abstract class AbstractFileKeyValueStore implements KeyValueStoreInterface
         $this->file = $pathToFile;
     }
 
-    public function set($key, $value)
+    public function set(string $key, $value): void
     {
-        $this->validateKey($key);
-
         $data = $this->load();
         $data[$key] = \is_object($value) ? \serialize($value) : $value;
         $this->update($data);
     }
 
-    public function get($key, $default = null)
+    public function get(string $key, $default = null)
     {
-        $this->validateKey($key);
-
         $data = $this->load();
 
         if (isset($data[$key])) {
@@ -79,19 +72,15 @@ abstract class AbstractFileKeyValueStore implements KeyValueStoreInterface
         return $default;
     }
 
-    public function has($key)
+    public function has(string $key): bool
     {
-        $this->validateKey($key);
-
         $data = $this->load();
 
         return isset($data[$key]);
     }
 
-    public function remove($key)
+    public function remove(string $key): void
     {
-        $this->validateKey($key);
-
         $data = $this->load();
 
         if (isset($data[$key])) {
@@ -100,7 +89,7 @@ abstract class AbstractFileKeyValueStore implements KeyValueStoreInterface
         }
     }
 
-    public function clear()
+    public function clear(): void
     {
         \file_put_contents($this->file, '', \LOCK_EX);
     }
