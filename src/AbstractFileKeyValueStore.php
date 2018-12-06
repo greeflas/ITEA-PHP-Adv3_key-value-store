@@ -2,10 +2,13 @@
 
 namespace Greeflas\Store;
 
+use Greeflas\Store\Validation\KeyValidatorTrait;
 use Greeflas\Store\Exception\InvalidConfigException;
 
 abstract class AbstractFileKeyValueStore implements KeyValueStoreInterface
 {
+    use KeyValidatorTrait;
+
     protected $file;
 
     abstract protected function load();
@@ -31,6 +34,8 @@ abstract class AbstractFileKeyValueStore implements KeyValueStoreInterface
 
     public function set($key, $value)
     {
+        $this->validateKey($key);
+
         $data = $this->load();
         $data[$key] = \is_object($value) ? \serialize($value) : $value;
         $this->update($data);
@@ -38,6 +43,8 @@ abstract class AbstractFileKeyValueStore implements KeyValueStoreInterface
 
     public function get($key, $default = null)
     {
+        $this->validateKey($key);
+
         $data = $this->load();
 
         if (isset($data[$key])) {
@@ -55,6 +62,8 @@ abstract class AbstractFileKeyValueStore implements KeyValueStoreInterface
 
     public function has($key)
     {
+        $this->validateKey($key);
+
         $data = $this->load();
 
         return isset($data[$key]);
@@ -62,6 +71,8 @@ abstract class AbstractFileKeyValueStore implements KeyValueStoreInterface
 
     public function remove($key)
     {
+        $this->validateKey($key);
+
         $data = $this->load();
 
         if (isset($data[$key])) {
