@@ -17,6 +17,9 @@
         "ext-json": "*",
         "symfony/yaml": "^4.1"
     },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.13"
+    },
     "autoload": {
         "psr-4": {
             "Greeflas\\Store\\": "src/"
@@ -26,5 +29,8 @@
         "psr-4": {
             "Greeflas\\Store\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "cs-fix": "php-cs-fixer fix"
     }
 }
