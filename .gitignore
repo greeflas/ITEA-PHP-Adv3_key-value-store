@@ -6,3 +6,6 @@ vendor/
 
 # PHP CS Fixer
 .php_cs.cache
+
+# PHPUnit coverage
+report/

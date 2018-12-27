@@ -33,6 +33,6 @@
     },
     "scripts": {
         "cs-fix": "php-cs-fixer fix",
-        "tests": "phpunit"
+        "tests": "phpunit --coverage-html=report"
     }
 }

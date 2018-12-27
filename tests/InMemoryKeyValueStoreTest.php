@@ -85,7 +85,7 @@ class InMemoryKeyValueStoreTest extends TestCase
         self::assertFalse($this->store->has('second'));
     }
 
-    public function testCound()
+    public function testCount()
     {
         self::assertInstanceOf(\Countable::class, $this->store);
         self::assertCount(0, $this->store);
